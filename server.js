@@ -4,7 +4,12 @@ import cors from "cors";
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: "https://684371c4ef497ab2dafc7099--legendary-taiyaki-caddff.netlify.app", // <-- Apna Netlify URL yahan daal diya hai
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
+
 app.use(express.json());
 
 app.post("/calculate", (req, res) => {
