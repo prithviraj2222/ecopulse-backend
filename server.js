@@ -2,10 +2,10 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
-const PORT = 3000;
 
+// ✅ Set CORS for Netlify frontend
 app.use(cors({
-  origin: "https://684371c4ef497ab2dafc7099--legendary-taiyaki-caddff.netlify.app", // <-- Apna Netlify URL yahan daal diya hai
+  origin: "https://684371c4ef497ab2dafc7099--legendary-taiyaki-caddff.netlify.app",
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"]
 }));
@@ -26,12 +26,12 @@ app.post("/calculate", (req, res) => {
     return res.status(400).json({ error: "Invalid input data" });
   }
 
-  const carbonFromTravel = distance * 0.21; // kg CO2 per km
-  const carbonFromElectricity = electricity * 0.92; // kg CO2 per kWh
-  const carbonFromFuel = fuel * 2.31; // kg CO2 per liter
-  const carbonFromMeat = meat * 27; // kg CO2 per kg meat
-  const carbonFromWaste = waste * 1.9; // kg CO2 per kg waste
-  const carbonFromWater = water * 0.0003; // kg CO2 per liter water
+  const carbonFromTravel = distance * 0.21;
+  const carbonFromElectricity = electricity * 0.92;
+  const carbonFromFuel = fuel * 2.31;
+  const carbonFromMeat = meat * 27;
+  const carbonFromWaste = waste * 1.9;
+  const carbonFromWater = water * 0.0003;
 
   const totalCarbon =
     carbonFromTravel +
@@ -52,6 +52,8 @@ app.post("/calculate", (req, res) => {
   });
 });
 
+// ✅ This is necessary for Render deployment
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
